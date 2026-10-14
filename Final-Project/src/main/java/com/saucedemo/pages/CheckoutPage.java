@@ -6,34 +6,37 @@ import org.openqa.selenium.WebDriver;
 public class CheckoutPage {
     private WebDriver driver;
 
-    private By checkoutBtn = By.id("checkout");
-    private By firstNameInput = By.id("first-name");
-    private By lastNameInput = By.id("last-name");
-    private By postalCodeInput = By.id("postal-code");
-    private By continueBtn = By.id("continue");
-    private By finishBtn = By.id("finish");
+    // Locators
+    private By checkoutButton = By.id("checkout");
+    private By firstNameField = By.id("first-name");
+    private By lastNameField = By.id("last-name");
+    private By postalCodeField = By.id("postal-code");
+    private By continueButton = By.id("continue");
+    private By finishButton = By.id("finish");
     private By completeHeader = By.className("complete-header");
 
+    // Constructor
     public CheckoutPage(WebDriver driver) {
         this.driver = driver;
     }
 
-    public void proceedToCheckout() {
-        driver.findElement(checkoutBtn).click();
+    // Actions
+    public void clickCheckout() {
+        driver.findElement(checkoutButton).click();
     }
 
-    public void fillInformation(String first, String last, String zip) {
-        driver.findElement(firstNameInput).sendKeys(first);
-        driver.findElement(lastNameInput).sendKeys(last);
-        driver.findElement(postalCodeInput).sendKeys(zip);
-        driver.findElement(continueBtn).click();
+    public void enterShippingInfo(String fName, String lName, String zip) {
+        driver.findElement(firstNameField).sendKeys(fName);
+        driver.findElement(lastNameField).sendKeys(lName);
+        driver.findElement(postalCodeField).sendKeys(zip);
+        driver.findElement(continueButton).click();
     }
 
-    public void finishOrder() {
-        driver.findElement(finishBtn).click();
+    public void clickFinish() {
+        driver.findElement(finishButton).click();
     }
 
-    public String getSuccessMessage() {
+    public String getOrderCompleteMessage() {
         return driver.findElement(completeHeader).getText();
     }
 }

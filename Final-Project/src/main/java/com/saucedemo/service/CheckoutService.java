@@ -1,78 +1,40 @@
-package com.saucedemo.automation;
+package com.saucedemo.service;
 
-import com.saucedemo.pages.CheckoutPage;
-import com.saucedemo.pages.InventoryPage;
-import com.saucedemo.pages.LoginPage;
-import io.github.bonigarcia.wdm.WebDriverManager;
-import org.junit.jupiter.api.*;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
+public class CheckoutService {
 
-import java.time.Duration;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
-@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
-public class SauceDemoTest {
-    private static WebDriver driver;
-    private LoginPage loginPage;
-    private InventoryPage inventoryPage;
-    private CheckoutPage checkoutPage;
-
-    @BeforeAll
-    static void setupClass() {
-        WebDriverManager.chromedriver().setup();
-    }
-
-    @BeforeEach
-    void setup() {
-        driver = new ChromeDriver();
-        driver.manage().window().maximize();
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
-        driver.get("https://www.saucedemo.com/");
-
-        loginPage = new LoginPage(driver);
-        inventoryPage = new InventoryPage(driver);
-        checkoutPage = new CheckoutPage(driver);
-    }
-
-    @AfterEach
-    void tearDown() {
-        if (driver != null) {
-            driver.quit();
+    // Tính tổng tiền sản phẩm (chưa bao gồm thuế)
+    public double calculateSubtotal(double[] prices) {
+        if (prices == null || prices.length == 0) {
+            return 0.0;
         }
+        double total = 0.0;
+        for (double price : prices) {
+            if (price < 0) {
+                throw new IllegalArgumentException("Giá sản phẩm không được âm");
+            }
+            total += price;
+        }
+        return Math.round(total * 100.0) / 100.0;
     }
 
-    @Test
-    @Order(1)
-    @DisplayName("TC_AUTO_01: Đăng nhập thành công với tài khoản chuẩn")
-    void testLoginSuccess() {
-        loginPage.login("standard_user", "secret_sauce");
-        assertEquals("Products", inventoryPage.getTitle());
+    // Tính thuế (Tax 8% theo SauceDemo)
+    public double calculateTax(double subtotal) {
+        if (subtotal < 0) {
+            throw new IllegalArgumentException("Subtotal không hợp lệ");
+        }
+        return Math.round(subtotal * 0.08 * 100.0) / 100.0;
     }
 
-    @Test
-    @Order(2)
-    @DisplayName("TC_AUTO_02: Đăng nhập thất bại khi tài khoản bị khóa")
-    void testLoginLockedUser() {
-        loginPage.login("locked_out_user", "secret_sauce");
-        assertTrue(loginPage.getErrorMessage().contains("Sorry, this user has been locked out."));
+    // Tính tổng thanh toán cuối cùng (Total = Subtotal + Tax)
+    public double calculateTotal(double subtotal, double tax) {
+        return Math.round((subtotal + tax) * 100.0) / 100.0;
     }
 
-    @Test
-    @Order(3)
-    @DisplayName("TC_AUTO_03: Kịch bản End-to-End mua hàng hoàn tất")
-    void testEndToEndPurchase() {
-        loginPage.login("standard_user", "secret_sauce");
-        inventoryPage.addBackpackToCart();
-        assertEquals("1", inventoryPage.getCartCount());
-
-        inventoryPage.goToCart();
-        checkoutPage.proceedToCheckout();
-        checkoutPage.fillInformation("Phuc", "Vu", "100000");
-        checkoutPage.finishOrder();
-
-        assertEquals("Thank you for your order!", checkoutPage.getSuccessMessage());
+    // Kiểm tra tính hợp lệ của thông tin nhận hàng
+    public boolean validateShippingInfo(String firstName, String lastName, String postalCode) {
+        if (firstName == null || firstName.trim().isEmpty()) return false;
+        if (lastName == null || lastName.trim().isEmpty()) return false;
+        if (postalCode == null || postalCode.trim().isEmpty()) return false;
+        return true;
     }
 }
