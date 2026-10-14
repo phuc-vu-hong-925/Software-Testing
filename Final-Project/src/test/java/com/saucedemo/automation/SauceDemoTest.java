@@ -3,7 +3,6 @@ package com.saucedemo.automation;
 import com.saucedemo.pages.CheckoutPage;
 import com.saucedemo.pages.InventoryPage;
 import com.saucedemo.pages.LoginPage;
-import io.github.bonigarcia.wdm.WebDriverManager;
 import org.junit.jupiter.api.*;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -15,18 +14,13 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class SauceDemoTest {
-    private static WebDriver driver;
+    private WebDriver driver;
     private LoginPage loginPage;
     private InventoryPage inventoryPage;
     private CheckoutPage checkoutPage;
 
-    @BeforeAll
-    static void setupClass() {
-        WebDriverManager.chromedriver().setup();
-    }
-
     @BeforeEach
-    void setup() {
+    public void setUp() {
         driver = new ChromeDriver();
         driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
@@ -38,7 +32,7 @@ public class SauceDemoTest {
     }
 
     @AfterEach
-    void tearDown() {
+    public void tearDown() {
         if (driver != null) {
             driver.quit();
         }
@@ -46,33 +40,51 @@ public class SauceDemoTest {
 
     @Test
     @Order(1)
-    @DisplayName("TC_AUTO_01: Đăng nhập thành công với tài khoản chuẩn")
-    void testLoginSuccess() {
-        loginPage.login("standard_user", "secret_sauce");
-        assertEquals("Products", inventoryPage.getTitle());
+    @DisplayName("TC01 - Đăng nhập thất bại khi sai mật khẩu")
+    public void testLoginFailedInvalidPassword() {
+        loginPage.login("standard_user", "wrong_password");
+        String error = loginPage.getErrorMessage();
+        assertTrue(error.contains("Username and password do not match any user in this service"));
     }
 
     @Test
     @Order(2)
-    @DisplayName("TC_AUTO_02: Đăng nhập thất bại khi tài khoản bị khóa")
-    void testLoginLockedUser() {
+    @DisplayName("TC02 - Đăng nhập thất bại khi tài khoản bị khóa")
+    public void testLoginLockedOutUser() {
         loginPage.login("locked_out_user", "secret_sauce");
-        assertTrue(loginPage.getErrorMessage().contains("Sorry, this user has been locked out."));
+        String error = loginPage.getErrorMessage();
+        assertTrue(error.contains("Sorry, this user has been locked out."));
     }
 
     @Test
     @Order(3)
-    @DisplayName("TC_AUTO_03: Kịch bản End-to-End mua hàng hoàn tất")
-    void testEndToEndPurchase() {
+    @DisplayName("TC03 - Đăng nhập thành công với tài khoản chuẩn")
+    public void testLoginSuccess() {
+        loginPage.login("standard_user", "secret_sauce");
+        assertEquals("Products", inventoryPage.getPageTitle());
+    }
+
+    @Test
+    @Order(4)
+    @DisplayName("TC04 - Thêm sản phẩm vào giỏ hàng thành công")
+    public void testAddToCart() {
         loginPage.login("standard_user", "secret_sauce");
         inventoryPage.addBackpackToCart();
-        assertEquals("1", inventoryPage.getCartCount());
+        assertEquals("1", inventoryPage.getCartItemCount());
+    }
 
+    @Test
+    @Order(5)
+    @DisplayName("TC05 - Hoàn tất quy trình đặt hàng thành công (End-to-End Checkout)")
+    public void testEndToEndCheckout() {
+        loginPage.login("standard_user", "secret_sauce");
+        inventoryPage.addBackpackToCart();
         inventoryPage.goToCart();
-        checkoutPage.proceedToCheckout();
-        checkoutPage.fillInformation("Phuc", "Vu", "100000");
-        checkoutPage.finishOrder();
 
-        assertEquals("Thank you for your order!", checkoutPage.getSuccessMessage());
+        checkoutPage.clickCheckout();
+        checkoutPage.enterShippingInfo("Phuc", "Vu", "100000");
+        checkoutPage.clickFinish();
+
+        assertEquals("Thank you for your order!", checkoutPage.getOrderCompleteMessage());
     }
 }
