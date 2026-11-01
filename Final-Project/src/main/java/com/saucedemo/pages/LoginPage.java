@@ -1,44 +1,18 @@
 package com.saucedemo.pages;
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-public class LoginPage {
-    private WebDriver driver;
-
-    // Locators
-    private By usernameField = By.id("user-name");
-    private By passwordField = By.id("password");
-    private By loginButton = By.id("login-button");
-    private By errorMessage = By.cssSelector("[data-test='error']");
-
-    // Constructor
-    public LoginPage(WebDriver driver) {
-        this.driver = driver;
-    }
-
-    // Actions
-    public void enterUsername(String username) {
-        driver.findElement(usernameField).clear();
-        driver.findElement(usernameField).sendKeys(username);
-    }
-
-    public void enterPassword(String password) {
-        driver.findElement(passwordField).clear();
-        driver.findElement(passwordField).sendKeys(password);
-    }
-
-    public void clickLogin() {
-        driver.findElement(loginButton).click();
-    }
-
+public class LoginPage extends BasePage {
+    private static final By USER = By.id("user-name");
+    private static final By PASSWORD = By.id("password");
+    private static final By LOGIN = By.id("login-button");
+    public LoginPage(WebDriver driver) { super(driver); }
+    public void enterUsername(String username) { fill(USER, username); }
+    public void enterPassword(String password) { fill(PASSWORD, password); }
+    public void clickLogin() { click(LOGIN); }
     public void login(String username, String password) {
-        enterUsername(username);
-        enterPassword(password);
-        clickLogin();
+        enterUsername(username); enterPassword(password); clickLogin();
     }
-
-    public String getErrorMessage() {
-        return driver.findElement(errorMessage).getText();
-    }
+    public String getErrorMessage() { return visible(By.cssSelector("[data-test='error']")).getText(); }
+    public boolean isDisplayed() { return visible(LOGIN).isDisplayed(); }
 }

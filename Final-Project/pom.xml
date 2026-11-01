@@ -1,50 +1,50 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-    <modelVersion>4.0.0</modelVersion>
-
-    <groupId>com.saucedemo</groupId>
-    <artifactId>saucedemo-automation-testing</artifactId>
-    <version>1.0-SNAPSHOT</version>
-
-    <properties>
-        <maven.compiler.source>17</maven.compiler.source>
-        <maven.compiler.target>17</maven.compiler.target>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <junit.jupiter.version>5.10.0</junit.jupiter.version>
-        <selenium.version>4.14.1</selenium.version>
-    </properties>
-
-    <dependencies>
-        <!-- Selenium Java -->
-        <dependency>
-            <groupId>org.seleniumhq.selenium</groupId>
-            <artifactId>selenium-java</artifactId>
-            <version>${selenium.version}</version>
-        </dependency>
-
-        <!-- JUnit 5 API & Engine -->
-        <dependency>
-            <groupId>org.junit.jupiter</groupId>
-            <artifactId>junit-jupiter-api</artifactId>
-            <version>${junit.jupiter.version}</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.junit.jupiter</groupId>
-            <artifactId>junit-jupiter-engine</artifactId>
-            <version>${junit.jupiter.version}</version>
-            <scope>test</scope>
-        </dependency>
-    </dependencies>
-
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-surefire-plugin</artifactId>
-                <version>3.1.2</version>
-            </plugin>
-        </plugins>
-    </build>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.saucedemo</groupId><artifactId>saucedemo-automation-testing</artifactId><version>2.0-SNAPSHOT</version>
+  <properties>
+    <maven.compiler.release>17</maven.compiler.release>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <selenium.version>4.52.0</selenium.version><junit.version>5.10.0</junit.version>
+    <headless>true</headless><baseUrl>https://www.saucedemo.com/</baseUrl>
+    <wait.seconds>15</wait.seconds><screenshots>all</screenshots>
+    <groups></groups><excludedGroups></excludedGroups><jacoco.skip>false</jacoco.skip>
+    <chrome.binary></chrome.binary><webdriver.chrome.driver></webdriver.chrome.driver>
+    <jacocoArgLine></jacocoArgLine>
+  </properties>
+  <dependencies>
+    <dependency><groupId>org.seleniumhq.selenium</groupId><artifactId>selenium-java</artifactId><version>${selenium.version}</version></dependency>
+    <dependency><groupId>org.junit.jupiter</groupId><artifactId>junit-jupiter</artifactId><version>${junit.version}</version><scope>test</scope></dependency>
+  </dependencies>
+  <build><plugins>
+    <plugin><groupId>org.apache.maven.plugins</groupId><artifactId>maven-compiler-plugin</artifactId><version>3.13.0</version></plugin>
+    <plugin><groupId>org.apache.maven.plugins</groupId><artifactId>maven-surefire-plugin</artifactId><version>3.5.2</version>
+      <configuration>
+        <argLine>@{jacocoArgLine}</argLine><useModulePath>false</useModulePath>
+        <groups>${groups}</groups><excludedGroups>${excludedGroups}</excludedGroups>
+        <systemPropertyVariables>
+          <headless>${headless}</headless><baseUrl>${baseUrl}</baseUrl><wait.seconds>${wait.seconds}</wait.seconds>
+          <screenshots>${screenshots}</screenshots><chrome.binary>${chrome.binary}</chrome.binary>
+          <webdriver.chrome.driver>${webdriver.chrome.driver}</webdriver.chrome.driver>
+        </systemPropertyVariables>
+      </configuration>
+    </plugin>
+    <plugin><groupId>org.jacoco</groupId><artifactId>jacoco-maven-plugin</artifactId><version>0.8.16</version>
+      <configuration><skip>${jacoco.skip}</skip><includes><include>com/saucedemo/service/*</include></includes></configuration>
+      <executions>
+        <execution><id>agent</id><goals><goal>prepare-agent</goal></goals><configuration><propertyName>jacocoArgLine</propertyName></configuration></execution>
+        <execution><id>report</id><phase>verify</phase><goals><goal>report</goal></goals></execution>
+        <execution><id>coverage-check</id><phase>verify</phase><goals><goal>check</goal></goals>
+          <configuration><rules><rule><element>BUNDLE</element><limits>
+            <limit><counter>LINE</counter><value>COVEREDRATIO</value><minimum>0.80</minimum></limit>
+            <limit><counter>BRANCH</counter><value>COVEREDRATIO</value><minimum>0.70</minimum></limit>
+          </limits></rule></rules></configuration>
+        </execution>
+      </executions>
+    </plugin>
+  </plugins></build>
+  <profiles>
+    <profile><id>unit</id><properties><excludedGroups>ui</excludedGroups></properties></profile>
+    <profile><id>ui</id><properties><groups>ui</groups><jacoco.skip>true</jacoco.skip></properties></profile>
+  </profiles>
 </project>

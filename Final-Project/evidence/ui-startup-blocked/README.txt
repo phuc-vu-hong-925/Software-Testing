@@ -1,0 +1,1 @@
+UI smoke attempt in the build environment failed before reaching SauceDemo. Chrome exited because the environment denied socket() with Operation not permitted. This is NOT a passing UI result. Run RUN-ALL.cmd on Windows to validate the 24 UI tests.

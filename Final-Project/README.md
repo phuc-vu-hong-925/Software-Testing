@@ -1,83 +1,96 @@
-# BÁO CÁO BÀI TẬP LỚN (FINAL PROJECT): KIỂM THỬ HỆ THỐNG THƯƠNG MẠI ĐIỆN TỬ SAUCEDEMO
+# Kiểm thử tự động SauceDemo phiên bản nâng cấp
 
-- **Học phần:** Kiểm thử phần mềm (Software Testing)
-- **Sinh viên thực hiện:** Vũ Hồng Phúc
-- **Đối tượng kiểm thử (SUT):** Website thương mại điện tử SauceDemo (`https://www.saucedemo.com/`)
-- **Công nghệ & Công cụ:** Java 17, Selenium WebDriver 4, JUnit 5, Maven, mô hình Page Object Model (POM)
+**Sinh viên:** Vũ Hồng Phúc · **MSV:** 23010639 · **Lớp:** COUR01.LT01  
+**Học phần:** Đánh giá và Kiểm định chất lượng phần mềm  
+**Giảng viên:** Trịnh Thanh Bình · **Thực hiện:** Cá nhân
 
----
+## Bắt đầu trên Windows
 
-## 1. Giới thiệu và Mục tiêu Dự án
-Dự án xây dựng bộ khung kiểm thử tự động (Automation & Unit Testing Framework) cho hệ thống thương mại điện tử **SauceDemo**. Mục tiêu chính bao gồm:
-- **Kiểm thử đơn vị (Unit Testing):** Kiểm tra tính đúng đắn của các hàm xử lý logic tính toán giỏ hàng, thuế (8%) và xác thực thông tin giao hàng (`CheckoutService`).
-- **Kiểm thử giao diện tự động (UI Automation Testing):** Tự động hóa các luồng nghiệp vụ cốt lõi từ Đăng nhập (Login), Quản lý giỏ hàng (Inventory/Cart) đến Thanh toán đơn hàng hoàn chỉnh (End-to-End Checkout).
-- **Áp dụng kiến trúc Page Object Model (POM):** Tách biệt mã nguồn định vị phần tử giao diện (Locators/Pages) và kịch bản kiểm thử (Test Scripts), giúp mã nguồn dễ đọc, dễ bảo trì và tái sử dụng.
+1. Giải nén toàn bộ ZIP vào thư mục mới, ví dụ `D:\software testing\Final-Project-v2`. Không chép đè bản cũ trước khi lưu bản sao.
+2. Mở thư mục có `pom.xml` trong VS Code. Máy cần **JDK 17 trở lên**, internet và Google Chrome để chạy UI.
+3. Nhấp đúp **RUN-UNIT.cmd**. Maven Wrapper đi kèm sẽ tải Maven 3.9.9 lần đầu; không cần cấu hình lệnh `mvn` trong PATH.
+4. Khi unit thành công, nhấp đúp **RUN-ALL.cmd** để chạy cả unit và UI. Chrome sẽ mở trong quá trình chạy. Đừng thao tác trên các cửa sổ Chrome đang được test điều khiển.
+5. Chờ `BUILD SUCCESS` hoặc xem lỗi trong `target/surefire-reports`. Sau lần chạy all, gửi thư mục reports mới để cập nhật báo cáo kết quả trên Windows.
 
----
+Java 17 là phù hợp; không cần đổi Java chỉ vì VS Code gợi ý nâng cấp.
 
-## 2. Cấu trúc Thư mục Dự án
+## Lệnh trong terminal PowerShell
 
-```text
-Final-Project/
-├── src/
-│   ├── main/java/com/saucedemo/
-│   │   ├── pages/                  # Các lớp Page Object Model (POM)
-│   │   │   ├── LoginPage.java      # Định vị & thao tác trang Đăng nhập
-│   │   │   ├── InventoryPage.java  # Định vị & thao tác trang Sản phẩm & Giỏ hàng
-│   │   │   └── CheckoutPage.java   # Định vị & thao tác trang Thanh toán
-│   │   └── service/                # Lớp xử lý logic nghiệp vụ
-│   │       └── CheckoutService.java
-│   └── test/java/com/saucedemo/
-│       ├── automation/             # Kịch bản kiểm thử tự động với Selenium
-│       │   └── SauceDemoTest.java
-│       └── unit/                   # Kịch bản kiểm thử đơn vị với JUnit 5
-│           └── CheckoutServiceTest.java
-├── pom.xml                         # Quản lý thư viện Maven (Selenium, JUnit 5)
-└── README.md                       # Tài liệu báo cáo dự án
+Chuyển vào thư mục chứa `pom.xml`, rồi chạy:
+
+```powershell
+# 36 unit test, tạo coverage và kiểm tra ngưỡng
+.\mvnw.cmd -Punit clean verify
+
+# 24 UI test, mở trình duyệt; không chạy gate coverage của service
+.\mvnw.cmd -Pui "-Dheadless=false" clean verify
+
+# Toàn bộ 60 test, mặc định headless
+.\mvnw.cmd clean verify
+
+# Toàn bộ test và mở Chrome
+.\mvnw.cmd "-Dheadless=false" clean verify
 ```
 
----
+Linux/macOS dùng `./mvnw` thay cho `.\mvnw.cmd`. Nếu file mất quyền chạy: `chmod +x mvnw`.
+Nếu mạng không cho Maven Wrapper tải Maven, vẫn có thể dùng Maven đã cài: `mvn -Punit clean verify`.
 
-## 3. Danh sách Ca kiểm thử (Test Cases)
+## Kết quả kiểm tra đã thực hiện
 
-### 3.1. Kiểm thử Đơn vị (Unit Testing - `CheckoutServiceTest.java`)
+| Phạm vi | Trạng thái của bản nâng cấp |
+|---|---|
+| Biên dịch mã ứng dụng và cả hai lớp test | Thành công với Java 17 |
+| 36 unit test | 36 PASS, 0 failures, 0 errors, 0 skipped |
+| Coverage CheckoutService | 17/17 dòng và 22/22 nhánh, 100% theo JaCoCo |
+| 24 UI test mới | Đã biên dịch; chưa xác nhận chạy hoàn chỉnh trên Windows |
+| Thử khởi động UI trong môi trường build | Bị chặn bởi quyền socket khi Chrome khởi tạo; không phải kết quả PASS |
 
-| Mã TC | Tên ca kiểm thử | Đầu vào (Input) | Kết quả mong đợi (Expected Output) | Trạng thái |
-| :---: | :--- | :--- | :--- | :---: |
-| **UT01** | Tính đúng tổng tiền nhiều sản phẩm | `{29.99, 9.99, 15.99}` | `55.97` | **PASS** |
-| **UT02** | Tính tổng tiền khi giỏ hàng rỗng | `{}` | `0.0` | **PASS** |
-| **UT03** | Kiểm tra ngoại lệ khi giá sản phẩm âm | `{29.99, -5.0}` | Ném ngoại lệ `IllegalArgumentException` | **PASS** |
-| **UT04** | Tính thuế GTGT (8%) chính xác | `Subtotal = 55.97` | `Tax = 4.48` | **PASS** |
-| **UT05** | Xác thực thông tin giao hàng hợp lệ | `("Phuc", "Vu", "100000")` | `true` | **PASS** |
-| **UT06** | Báo lỗi khi thiếu thông tin giao hàng | `("", "Vu", "100000")` | `false` | **PASS** |
+**Kết quả 11/11 PASS của phiên bản cũ nằm riêng tại `evidence/baseline-v1`; không được dùng làm kết quả của 60 test mới.**
+Các số coverage chỉ áp dụng cho module Java `CheckoutService`, không phải toàn bộ website SauceDemo.
 
----
+## Các thay đổi chính
 
-### 3.2. Kiểm thử Tự động Giao diện (Selenium WebDriver - `SauceDemoTest.java`)
+- 36 unit test: giữ 6 test ban đầu và bổ sung 30 test, gồm null, rỗng, biên làm tròn, dữ liệu âm/NaN/vô hạn và các nhánh thông tin giao hàng.
+- 24 UI test độc lập: login, giỏ hàng, xóa hàng, dữ liệu checkout thiếu, hủy, sắp xếp, chi tiết sản phẩm, logout và đối chiếu tiền.
+- Thêm `CartPage` và `BasePage`; dùng explicit wait, không trộn implicit wait.
+- Badge giỏ rỗng trả về `0`; test kiểm tra cả tên hàng và giá.
+- Checkpoint chụp overview trước Finish. Chụp kết quả từng test trước khi đóng trình duyệt; luôn chụp khi test lỗi nếu Chrome còn hoạt động.
+- Tính tiền bằng BigDecimal nội bộ và HALF_UP; đầu vào tiền phải hữu hạn và không âm.
+- Selenium 4.52.0, Surefire 3.5.2, JaCoCo 0.8.16; Java 17 và JUnit 5.10.0.
+- Maven Wrapper, nút chạy Windows và cấu hình CI mẫu.
 
-| Mã TC | Tên kịch bản kiểm thử | Các bước thực hiện | Kết quả mong đợi | Trạng thái |
-| :---: | :--- | :--- | :--- | :---: |
-| **TC01** | Đăng nhập thất bại khi sai mật khẩu | Nhập `standard_user` / `wrong_password` $\rightarrow$ Click Login | Hiển thị thông báo lỗi: *"Username and password do not match..."* | **PASS** |
-| **TC02** | Đăng nhập thất bại với tài khoản bị khóa | Nhập `locked_out_user` / `secret_sauce` $\rightarrow$ Click Login | Hiển thị thông báo lỗi: *"Sorry, this user has been locked out."* | **PASS** |
-| **TC03** | Đăng nhập thành công với tài khoản chuẩn | Nhập `standard_user` / `secret_sauce` $\rightarrow$ Click Login | Chuyển hướng vào trang chủ, tiêu đề hiển thị `"Products"` | **PASS** |
-| **TC04** | Thêm sản phẩm vào giỏ hàng thành công | Đăng nhập $\rightarrow$ Click `"Add to cart"` sản phẩm Backpack | Biểu tượng giỏ hàng cập nhật số lượng là `"1"` | **PASS** |
-| **TC05** | Hoàn tất luồng đặt hàng End-to-End | Đăng nhập $\rightarrow$ Thêm hàng $\rightarrow$ Vào giỏ $\rightarrow$ Checkout $\rightarrow$ Điền `"Phuc", "Vu", "100000"` $\rightarrow$ Finish | Hiển thị thông báo hoàn tất: `"Thank you for your order!"` | **PASS** |
+## Đọc kết quả sau khi chạy
 
----
+- `target/surefire-reports/`: XML/TXT của lần chạy mới.
+- `target/site/jacoco/index.html`: mở bằng Chrome để đọc coverage sau `verify` với unit hoặc all.
+- `target/screenshots/`: ảnh PASS/FAIL và checkpoint overview.
+- `target/test-environment.properties`: Java, hệ điều hành, Chrome và thời điểm của lần chạy UI.
+- `evidence/verification-unit/`: bằng chứng unit đã chạy khi chuẩn bị gói này.
+- `evidence/ui-startup-blocked/`: chẩn đoán lần thử UI bị giới hạn môi trường.
+- `docs/`: test plan, yêu cầu, danh sách ca kiểm thử, ma trận truy xuất và báo cáo.
 
-## 4. Hướng dẫn Cài đặt và Thực thi Kiểm thử
+`clean` xóa thư mục target, vì vậy sao lưu reports và screenshots trước lần chạy mới nếu cần giữ lịch sử. `-Pui` chỉ chạy UI nên không tạo JaCoCo cho service.
 
-1. **Yêu cầu môi trường:**
-   - Java Development Kit (JDK) phiên bản 17 trở lên.
-   - Apache Maven 3.8+.
-   - Trình duyệt Google Chrome.
+## Cấu hình tùy chọn
 
-2. **Lệnh chạy toàn bộ bộ kiểm thử:**
-   ```bash
-   cd Final-Project
-   mvn clean test
-   ```
+```powershell
+.\mvnw.cmd "-Dwait.seconds=20" clean verify
+.\mvnw.cmd "-Dscreenshots=fail" clean verify
+.\mvnw.cmd "-Dchrome.binary=C:\path\chrome.exe" "-Dwebdriver.chrome.driver=C:\path\chromedriver.exe" -Pui test
+```
 
-3. **Tổng kết kết quả thực thi:**
-   - **Tổng số bài kiểm thử:** 11 tests (6 Unit Tests + 5 Automation UI Tests).
-   - **Kết quả:** 11/11 Passed (100% Pass rate, 0 Failures, 0 Errors).
+Mặc định Selenium Manager tìm/tải driver tương thích nếu chưa cấu hình. Lần đầu cần internet. Không có retry tự động hoặc skip âm thầm khi Chrome không khởi tạo được.
+
+## Giới hạn và hợp đồng nghiệp vụ
+
+CheckoutService là **module mô phỏng do sinh viên sở hữu**, không được coi là backend của website. UI test không dùng chính module này làm oracle để tránh lỗi chung giữa bộ tính kỳ vọng và ứng dụng.
+
+Kỳ vọng demo: Backpack 29.99 USD, Bike Light 9.99 USD, thuế 8%; hai sản phẩm có subtotal 39.98, tax 3.20, total 43.18 USD. Nếu website thay dữ liệu/chính sách, phải xác minh rồi cập nhật test, không sửa kỳ vọng chỉ để test PASS.
+
+Thông tin giao hàng của module chỉ kiểm tra bắt buộc, không tự đặt quy tắc độ dài hay định dạng mã bưu chính. Không thêm test API, database, thanh toán ngân hàng hoặc tải lớn vào website công cộng này.
+
+## CI tùy chọn
+
+Nếu chép dự án vào thư mục con `Final-Project` của repository hiện có, hãy đưa `.github/workflows/tests.yml` lên `.github/workflows/tests.yml` ở **gốc repository**. Chỉ giải nén dự án không tạo hay kích hoạt workflow trên GitHub.
+
+Sau khi RUN-ALL.cmd xong, chạy EXPORT-RESULTS.cmd để tạo `SauceDemo-results.zip` chứa báo cáo và ảnh của lần chạy trên máy bạn.

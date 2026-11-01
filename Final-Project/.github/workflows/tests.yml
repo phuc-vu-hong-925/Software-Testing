@@ -1,0 +1,37 @@
+name: SauceDemo tests
+on: [push, pull_request, workflow_dispatch]
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+          cache: maven
+          cache-dependency-path: '**/pom.xml'
+      - uses: browser-actions/setup-chrome@v1
+        id: chrome
+        with:
+          chrome-version: stable
+      - name: Locate standalone or repository project
+        id: project
+        shell: bash
+        run: |
+          if [ -f Final-Project/pom.xml ]; then echo "dir=Final-Project" >> "$GITHUB_OUTPUT"; else echo "dir=." >> "$GITHUB_OUTPUT"; fi
+      - name: Run all tests and coverage
+        working-directory: ${{ steps.project.outputs.dir }}
+        run: |
+          chmod +x mvnw
+          ./mvnw -B clean verify -Dchrome.binary="${{ steps.chrome.outputs.chrome-path }}"
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: test-evidence
+          path: |
+            **/target/surefire-reports/**
+            **/target/site/jacoco/**
+            **/target/screenshots/**
+            **/target/test-environment.properties

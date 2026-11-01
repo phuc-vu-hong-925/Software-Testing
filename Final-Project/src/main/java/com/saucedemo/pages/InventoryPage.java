@@ -1,36 +1,44 @@
 package com.saucedemo.pages;
+import org.openqa.selenium.*;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Select;
+import java.math.BigDecimal;
+import java.util.List;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-
-public class InventoryPage {
-    private WebDriver driver;
-
-    // Locators
-    private By titleHeader = By.className("title");
-    private By addToCartBackpackButton = By.id("add-to-cart-sauce-labs-backpack");
-    private By shoppingCartBadge = By.className("shopping_cart_badge");
-    private By cartButton = By.className("shopping_cart_link");
-
-    // Constructor
-    public InventoryPage(WebDriver driver) {
-        this.driver = driver;
+public class InventoryPage extends BasePage {
+    public static final String BACKPACK = "sauce-labs-backpack";
+    public static final String BIKE_LIGHT = "sauce-labs-bike-light";
+    public InventoryPage(WebDriver driver) { super(driver); }
+    public void addBackpackToCart() { addProduct(BACKPACK); }
+    public void addProduct(String slug) {
+        click(By.id("add-to-cart-" + slug));
+        visible(By.id("remove-" + slug));
     }
-
-    // Actions
-    public String getPageTitle() {
-        return driver.findElement(titleHeader).getText();
+    public void removeProduct(String slug) {
+        click(By.id("remove-" + slug));
+        visible(By.id("add-to-cart-" + slug));
     }
-
-    public void addBackpackToCart() {
-        driver.findElement(addToCartBackpackButton).click();
+    public void goToCart() { click(By.className("shopping_cart_link")); visible(By.id("checkout")); }
+    public List<String> getProductNames() {
+        visible(By.className("inventory_list"));
+        return driver.findElements(By.className("inventory_item_name")).stream().map(WebElement::getText).toList();
     }
-
-    public String getCartItemCount() {
-        return driver.findElement(shoppingCartBadge).getText();
+    public List<BigDecimal> getProductPrices() {
+        visible(By.className("inventory_list"));
+        return driver.findElements(By.className("inventory_item_price")).stream().map(e -> parseMoney(e.getText())).toList();
     }
-
-    public void goToCart() {
-        driver.findElement(cartButton).click();
+    public void sortBy(String value) {
+        Select select = new Select(visible(By.className("product_sort_container")));
+        select.selectByValue(value);
+        wait.until(d -> new Select(d.findElement(By.className("product_sort_container"))).getFirstSelectedOption().getAttribute("value").equals(value));
     }
+    public void openProduct(String name) {
+        for (WebElement element : driver.findElements(By.className("inventory_item_name"))) {
+            if (element.getText().equals(name)) { element.click(); visible(By.className("inventory_details_name")); return; }
+        }
+        throw new NoSuchElementException("Không tìm thấy sản phẩm: " + name);
+    }
+    public String getDetailName() { return visible(By.className("inventory_details_name")).getText(); }
+    public BigDecimal getDetailPrice() { return parseMoney(visible(By.className("inventory_details_price")).getText()); }
+    public void backToProducts() { click(By.id("back-to-products")); visible(By.className("inventory_list")); }
 }

@@ -1,0 +1,61 @@
+﻿id,level,description,method,status
+UT01,UNIT,Tính đúng tổng tiền của nhiều sản phẩm,testCalculateSubtotalValid,PASS
+UT02,UNIT,Giỏ hàng rỗng thì tổng tiền bằng 0,testCalculateSubtotalEmpty,PASS
+UT03,UNIT,Ném ra ngoại lệ khi giá sản phẩm bị âm,testCalculateSubtotalNegativePrice,PASS
+UT04,UNIT,Tính thuế 8% chính xác,testCalculateTax,PASS
+UT05,UNIT,Kiểm tra hợp lệ thông tin giao hàng khi điền đầy đủ,testValidateShippingInfoValid,PASS
+UT06,UNIT,Báo lỗi khi thiếu First Name hoặc Postal Code,testValidateShippingInfoInvalid,PASS
+UT07,UNIT,Mảng null trả về 0,testCalculateSubtotalNull,PASS
+UT08,UNIT,Một sản phẩm,testCalculateSubtotalSingleItem,PASS
+UT09,UNIT,Giá bằng 0,testCalculateSubtotalZeroPrice,PASS
+UT10,UNIT,Làm tròn subtotal lên tại nửa cent,testCalculateSubtotalRoundUp,PASS
+UT11,UNIT,Làm tròn subtotal xuống,testCalculateSubtotalRoundDown,PASS
+UT12,UNIT,Từ chối giá NaN,testCalculateSubtotalNaN,PASS
+UT13,UNIT,Từ chối giá vô hạn,testCalculateSubtotalInfinity,PASS
+UT14,UNIT,Thuế với subtotal 0,testCalculateTaxZero,PASS
+UT15,UNIT,Từ chối subtotal âm khi tính thuế,testCalculateTaxNegative,PASS
+UT16,UNIT,Thuế làm tròn lên,testCalculateTaxRoundUp,PASS
+UT17,UNIT,Thuế làm tròn xuống,testCalculateTaxRoundDown,PASS
+UT18,UNIT,Từ chối NaN khi tính thuế,testCalculateTaxNaN,PASS
+UT19,UNIT,Từ chối vô hạn khi tính thuế,testCalculateTaxInfinity,PASS
+UT20,UNIT,Tổng thanh toán hợp lệ,testCalculateTotalValid,PASS
+UT21,UNIT,Tổng thanh toán 0,testCalculateTotalZero,PASS
+UT22,UNIT,Tổng thanh toán làm tròn HALF_UP,testCalculateTotalRoundUp,PASS
+UT23,UNIT,Từ chối subtotal âm khi tính tổng,testCalculateTotalNegativeSubtotal,PASS
+UT24,UNIT,Từ chối thuế âm,testCalculateTotalNegativeTax,PASS
+UT25,UNIT,Từ chối subtotal NaN,testCalculateTotalNaNSubtotal,PASS
+UT26,UNIT,Từ chối thuế NaN,testCalculateTotalNaNTax,PASS
+UT27,UNIT,Từ chối subtotal vô hạn,testCalculateTotalInfiniteSubtotal,PASS
+UT28,UNIT,Từ chối thuế vô hạn,testCalculateTotalInfiniteTax,PASS
+UT29,UNIT,First Name null,testShippingFirstNameNull,PASS
+UT30,UNIT,First Name chỉ khoảng trắng,testShippingFirstNameWhitespace,PASS
+UT31,UNIT,Last Name null,testShippingLastNameNull,PASS
+UT32,UNIT,Last Name rỗng,testShippingLastNameEmpty,PASS
+UT33,UNIT,Last Name chỉ khoảng trắng,testShippingLastNameWhitespace,PASS
+UT34,UNIT,Postal Code rỗng,testShippingPostalCodeEmpty,PASS
+UT35,UNIT,Postal Code chỉ khoảng trắng,testShippingPostalCodeWhitespace,PASS
+UT36,UNIT,Dữ liệu không rỗng có khoảng trắng hai đầu,testShippingPaddedValid,PASS
+TC01,UI,Sai mật khẩu bị từ chối,testLoginFailedInvalidPassword,NOT_RUN_ON_TARGET_MACHINE
+TC02,UI,Tài khoản khóa bị từ chối,testLoginLockedOutUser,NOT_RUN_ON_TARGET_MACHINE
+TC03,UI,Đăng nhập hợp lệ,testLoginSuccess,NOT_RUN_ON_TARGET_MACHINE
+TC04,UI,"Thêm Backpack và kiểm tra đúng hàng, giá",testAddToCart,NOT_RUN_ON_TARGET_MACHINE
+TC05,UI,"E2E kiểm tra hàng, tiền và hoàn tất đơn",testEndToEndCheckout,NOT_RUN_ON_TARGET_MACHINE
+TC06,UI,Thiếu username,testLoginEmptyUsername,NOT_RUN_ON_TARGET_MACHINE
+TC07,UI,Thiếu password,testLoginEmptyPassword,NOT_RUN_ON_TARGET_MACHINE
+TC08,UI,Thêm hai sản phẩm,testAddTwoProducts,NOT_RUN_ON_TARGET_MACHINE
+TC09,UI,Xóa một trong hai sản phẩm,testRemoveOneOfTwoProducts,NOT_RUN_ON_TARGET_MACHINE
+TC10,UI,"Xóa sản phẩm cuối, giỏ rỗng",testRemoveLastProduct,NOT_RUN_ON_TARGET_MACHINE
+TC11,UI,Xóa hàng tại trang sản phẩm,testRemoveFromInventory,NOT_RUN_ON_TARGET_MACHINE
+TC12,UI,Tiếp tục mua sắm giữ nguyên giỏ,testContinueShopping,NOT_RUN_ON_TARGET_MACHINE
+TC13,UI,Checkout thiếu First Name,testCheckoutMissingFirstName,NOT_RUN_ON_TARGET_MACHINE
+TC14,UI,Checkout thiếu Last Name,testCheckoutMissingLastName,NOT_RUN_ON_TARGET_MACHINE
+TC15,UI,Checkout thiếu Postal Code,testCheckoutMissingPostalCode,NOT_RUN_ON_TARGET_MACHINE
+TC16,UI,Hủy nhập thông tin quay lại giỏ,testCancelShipping,NOT_RUN_ON_TARGET_MACHINE
+TC17,UI,Hủy overview giữ hàng trong giỏ,testCancelOverview,NOT_RUN_ON_TARGET_MACHINE
+TC18,UI,Sắp xếp giá tăng dần,testSortPriceAscending,NOT_RUN_ON_TARGET_MACHINE
+TC19,UI,Sắp xếp tên giảm dần,testSortNameDescending,NOT_RUN_ON_TARGET_MACHINE
+TC20,UI,Đăng xuất,testLogout,NOT_RUN_ON_TARGET_MACHINE
+TC21,UI,Chi tiết sản phẩm và quay lại,testProductDetails,NOT_RUN_ON_TARGET_MACHINE
+TC22,UI,Sắp xếp giá giảm dần,testSortPriceDescending,NOT_RUN_ON_TARGET_MACHINE
+TC23,UI,Sắp xếp tên tăng dần,testSortNameAscending,NOT_RUN_ON_TARGET_MACHINE
+TC24,UI,Đối chiếu tổng hai sản phẩm và quay về trang chủ sau đặt hàng,testTwoProductCheckout,NOT_RUN_ON_TARGET_MACHINE

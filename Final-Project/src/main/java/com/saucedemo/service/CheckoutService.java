@@ -1,40 +1,44 @@
 package com.saucedemo.service;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+
+/** Module mô phỏng độc lập, không phải backend của SauceDemo. */
 public class CheckoutService {
+    private static final BigDecimal TAX_RATE = new BigDecimal("0.08");
 
-    // Tính tổng tiền sản phẩm (chưa bao gồm thuế)
     public double calculateSubtotal(double[] prices) {
-        if (prices == null || prices.length == 0) {
-            return 0.0;
-        }
-        double total = 0.0;
+        if (prices == null || prices.length == 0) return 0.0;
+        BigDecimal total = BigDecimal.ZERO;
         for (double price : prices) {
-            if (price < 0) {
-                throw new IllegalArgumentException("Giá sản phẩm không được âm");
-            }
-            total += price;
+            total = total.add(moneyInput(price, "Giá sản phẩm"));
         }
-        return Math.round(total * 100.0) / 100.0;
+        return rounded(total);
     }
 
-    // Tính thuế (Tax 8% theo SauceDemo)
     public double calculateTax(double subtotal) {
-        if (subtotal < 0) {
-            throw new IllegalArgumentException("Subtotal không hợp lệ");
-        }
-        return Math.round(subtotal * 0.08 * 100.0) / 100.0;
+        return rounded(moneyInput(subtotal, "Subtotal").multiply(TAX_RATE));
     }
 
-    // Tính tổng thanh toán cuối cùng (Total = Subtotal + Tax)
     public double calculateTotal(double subtotal, double tax) {
-        return Math.round((subtotal + tax) * 100.0) / 100.0;
+        return rounded(moneyInput(subtotal, "Subtotal").add(moneyInput(tax, "Tax")));
     }
 
-    // Kiểm tra tính hợp lệ của thông tin nhận hàng
     public boolean validateShippingInfo(String firstName, String lastName, String postalCode) {
         if (firstName == null || firstName.trim().isEmpty()) return false;
         if (lastName == null || lastName.trim().isEmpty()) return false;
         if (postalCode == null || postalCode.trim().isEmpty()) return false;
         return true;
+    }
+
+    private BigDecimal moneyInput(double value, String field) {
+        if (!Double.isFinite(value) || value < 0) {
+            throw new IllegalArgumentException(field + " phải hữu hạn và không âm");
+        }
+        return BigDecimal.valueOf(value);
+    }
+
+    private double rounded(BigDecimal value) {
+        return value.setScale(2, RoundingMode.HALF_UP).doubleValue();
     }
 }

@@ -1,0 +1,422 @@
+[
+  {
+    "id": "UT01",
+    "level": "UNIT",
+    "description": "Tính đúng tổng tiền của nhiều sản phẩm",
+    "method": "testCalculateSubtotalValid",
+    "status": "PASS"
+  },
+  {
+    "id": "UT02",
+    "level": "UNIT",
+    "description": "Giỏ hàng rỗng thì tổng tiền bằng 0",
+    "method": "testCalculateSubtotalEmpty",
+    "status": "PASS"
+  },
+  {
+    "id": "UT03",
+    "level": "UNIT",
+    "description": "Ném ra ngoại lệ khi giá sản phẩm bị âm",
+    "method": "testCalculateSubtotalNegativePrice",
+    "status": "PASS"
+  },
+  {
+    "id": "UT04",
+    "level": "UNIT",
+    "description": "Tính thuế 8% chính xác",
+    "method": "testCalculateTax",
+    "status": "PASS"
+  },
+  {
+    "id": "UT05",
+    "level": "UNIT",
+    "description": "Kiểm tra hợp lệ thông tin giao hàng khi điền đầy đủ",
+    "method": "testValidateShippingInfoValid",
+    "status": "PASS"
+  },
+  {
+    "id": "UT06",
+    "level": "UNIT",
+    "description": "Báo lỗi khi thiếu First Name hoặc Postal Code",
+    "method": "testValidateShippingInfoInvalid",
+    "status": "PASS"
+  },
+  {
+    "id": "UT07",
+    "level": "UNIT",
+    "description": "Mảng null trả về 0",
+    "method": "testCalculateSubtotalNull",
+    "status": "PASS"
+  },
+  {
+    "id": "UT08",
+    "level": "UNIT",
+    "description": "Một sản phẩm",
+    "method": "testCalculateSubtotalSingleItem",
+    "status": "PASS"
+  },
+  {
+    "id": "UT09",
+    "level": "UNIT",
+    "description": "Giá bằng 0",
+    "method": "testCalculateSubtotalZeroPrice",
+    "status": "PASS"
+  },
+  {
+    "id": "UT10",
+    "level": "UNIT",
+    "description": "Làm tròn subtotal lên tại nửa cent",
+    "method": "testCalculateSubtotalRoundUp",
+    "status": "PASS"
+  },
+  {
+    "id": "UT11",
+    "level": "UNIT",
+    "description": "Làm tròn subtotal xuống",
+    "method": "testCalculateSubtotalRoundDown",
+    "status": "PASS"
+  },
+  {
+    "id": "UT12",
+    "level": "UNIT",
+    "description": "Từ chối giá NaN",
+    "method": "testCalculateSubtotalNaN",
+    "status": "PASS"
+  },
+  {
+    "id": "UT13",
+    "level": "UNIT",
+    "description": "Từ chối giá vô hạn",
+    "method": "testCalculateSubtotalInfinity",
+    "status": "PASS"
+  },
+  {
+    "id": "UT14",
+    "level": "UNIT",
+    "description": "Thuế với subtotal 0",
+    "method": "testCalculateTaxZero",
+    "status": "PASS"
+  },
+  {
+    "id": "UT15",
+    "level": "UNIT",
+    "description": "Từ chối subtotal âm khi tính thuế",
+    "method": "testCalculateTaxNegative",
+    "status": "PASS"
+  },
+  {
+    "id": "UT16",
+    "level": "UNIT",
+    "description": "Thuế làm tròn lên",
+    "method": "testCalculateTaxRoundUp",
+    "status": "PASS"
+  },
+  {
+    "id": "UT17",
+    "level": "UNIT",
+    "description": "Thuế làm tròn xuống",
+    "method": "testCalculateTaxRoundDown",
+    "status": "PASS"
+  },
+  {
+    "id": "UT18",
+    "level": "UNIT",
+    "description": "Từ chối NaN khi tính thuế",
+    "method": "testCalculateTaxNaN",
+    "status": "PASS"
+  },
+  {
+    "id": "UT19",
+    "level": "UNIT",
+    "description": "Từ chối vô hạn khi tính thuế",
+    "method": "testCalculateTaxInfinity",
+    "status": "PASS"
+  },
+  {
+    "id": "UT20",
+    "level": "UNIT",
+    "description": "Tổng thanh toán hợp lệ",
+    "method": "testCalculateTotalValid",
+    "status": "PASS"
+  },
+  {
+    "id": "UT21",
+    "level": "UNIT",
+    "description": "Tổng thanh toán 0",
+    "method": "testCalculateTotalZero",
+    "status": "PASS"
+  },
+  {
+    "id": "UT22",
+    "level": "UNIT",
+    "description": "Tổng thanh toán làm tròn HALF_UP",
+    "method": "testCalculateTotalRoundUp",
+    "status": "PASS"
+  },
+  {
+    "id": "UT23",
+    "level": "UNIT",
+    "description": "Từ chối subtotal âm khi tính tổng",
+    "method": "testCalculateTotalNegativeSubtotal",
+    "status": "PASS"
+  },
+  {
+    "id": "UT24",
+    "level": "UNIT",
+    "description": "Từ chối thuế âm",
+    "method": "testCalculateTotalNegativeTax",
+    "status": "PASS"
+  },
+  {
+    "id": "UT25",
+    "level": "UNIT",
+    "description": "Từ chối subtotal NaN",
+    "method": "testCalculateTotalNaNSubtotal",
+    "status": "PASS"
+  },
+  {
+    "id": "UT26",
+    "level": "UNIT",
+    "description": "Từ chối thuế NaN",
+    "method": "testCalculateTotalNaNTax",
+    "status": "PASS"
+  },
+  {
+    "id": "UT27",
+    "level": "UNIT",
+    "description": "Từ chối subtotal vô hạn",
+    "method": "testCalculateTotalInfiniteSubtotal",
+    "status": "PASS"
+  },
+  {
+    "id": "UT28",
+    "level": "UNIT",
+    "description": "Từ chối thuế vô hạn",
+    "method": "testCalculateTotalInfiniteTax",
+    "status": "PASS"
+  },
+  {
+    "id": "UT29",
+    "level": "UNIT",
+    "description": "First Name null",
+    "method": "testShippingFirstNameNull",
+    "status": "PASS"
+  },
+  {
+    "id": "UT30",
+    "level": "UNIT",
+    "description": "First Name chỉ khoảng trắng",
+    "method": "testShippingFirstNameWhitespace",
+    "status": "PASS"
+  },
+  {
+    "id": "UT31",
+    "level": "UNIT",
+    "description": "Last Name null",
+    "method": "testShippingLastNameNull",
+    "status": "PASS"
+  },
+  {
+    "id": "UT32",
+    "level": "UNIT",
+    "description": "Last Name rỗng",
+    "method": "testShippingLastNameEmpty",
+    "status": "PASS"
+  },
+  {
+    "id": "UT33",
+    "level": "UNIT",
+    "description": "Last Name chỉ khoảng trắng",
+    "method": "testShippingLastNameWhitespace",
+    "status": "PASS"
+  },
+  {
+    "id": "UT34",
+    "level": "UNIT",
+    "description": "Postal Code rỗng",
+    "method": "testShippingPostalCodeEmpty",
+    "status": "PASS"
+  },
+  {
+    "id": "UT35",
+    "level": "UNIT",
+    "description": "Postal Code chỉ khoảng trắng",
+    "method": "testShippingPostalCodeWhitespace",
+    "status": "PASS"
+  },
+  {
+    "id": "UT36",
+    "level": "UNIT",
+    "description": "Dữ liệu không rỗng có khoảng trắng hai đầu",
+    "method": "testShippingPaddedValid",
+    "status": "PASS"
+  },
+  {
+    "id": "TC01",
+    "level": "UI",
+    "description": "Sai mật khẩu bị từ chối",
+    "method": "testLoginFailedInvalidPassword",
+    "status": "NOT_RUN_ON_TARGET_MACHINE"
+  },
+  {
+    "id": "TC02",
+    "level": "UI",
+    "description": "Tài khoản khóa bị từ chối",
+    "method": "testLoginLockedOutUser",
+    "status": "NOT_RUN_ON_TARGET_MACHINE"
+  },
+  {
+    "id": "TC03",
+    "level": "UI",
+    "description": "Đăng nhập hợp lệ",
+    "method": "testLoginSuccess",
+    "status": "NOT_RUN_ON_TARGET_MACHINE"
+  },
+  {
+    "id": "TC04",
+    "level": "UI",
+    "description": "Thêm Backpack và kiểm tra đúng hàng, giá",
+    "method": "testAddToCart",
+    "status": "NOT_RUN_ON_TARGET_MACHINE"
+  },
+  {
+    "id": "TC05",
+    "level": "UI",
+    "description": "E2E kiểm tra hàng, tiền và hoàn tất đơn",
+    "method": "testEndToEndCheckout",
+    "status": "NOT_RUN_ON_TARGET_MACHINE"
+  },
+  {
+    "id": "TC06",
+    "level": "UI",
+    "description": "Thiếu username",
+    "method": "testLoginEmptyUsername",
+    "status": "NOT_RUN_ON_TARGET_MACHINE"
+  },
+  {
+    "id": "TC07",
+    "level": "UI",
+    "description": "Thiếu password",
+    "method": "testLoginEmptyPassword",
+    "status": "NOT_RUN_ON_TARGET_MACHINE"
+  },
+  {
+    "id": "TC08",
+    "level": "UI",
+    "description": "Thêm hai sản phẩm",
+    "method": "testAddTwoProducts",
+    "status": "NOT_RUN_ON_TARGET_MACHINE"
+  },
+  {
+    "id": "TC09",
+    "level": "UI",
+    "description": "Xóa một trong hai sản phẩm",
+    "method": "testRemoveOneOfTwoProducts",
+    "status": "NOT_RUN_ON_TARGET_MACHINE"
+  },
+  {
+    "id": "TC10",
+    "level": "UI",
+    "description": "Xóa sản phẩm cuối, giỏ rỗng",
+    "method": "testRemoveLastProduct",
+    "status": "NOT_RUN_ON_TARGET_MACHINE"
+  },
+  {
+    "id": "TC11",
+    "level": "UI",
+    "description": "Xóa hàng tại trang sản phẩm",
+    "method": "testRemoveFromInventory",
+    "status": "NOT_RUN_ON_TARGET_MACHINE"
+  },
+  {
+    "id": "TC12",
+    "level": "UI",
+    "description": "Tiếp tục mua sắm giữ nguyên giỏ",
+    "method": "testContinueShopping",
+    "status": "NOT_RUN_ON_TARGET_MACHINE"
+  },
+  {
+    "id": "TC13",
+    "level": "UI",
+    "description": "Checkout thiếu First Name",
+    "method": "testCheckoutMissingFirstName",
+    "status": "NOT_RUN_ON_TARGET_MACHINE"
+  },
+  {
+    "id": "TC14",
+    "level": "UI",
+    "description": "Checkout thiếu Last Name",
+    "method": "testCheckoutMissingLastName",
+    "status": "NOT_RUN_ON_TARGET_MACHINE"
+  },
+  {
+    "id": "TC15",
+    "level": "UI",
+    "description": "Checkout thiếu Postal Code",
+    "method": "testCheckoutMissingPostalCode",
+    "status": "NOT_RUN_ON_TARGET_MACHINE"
+  },
+  {
+    "id": "TC16",
+    "level": "UI",
+    "description": "Hủy nhập thông tin quay lại giỏ",
+    "method": "testCancelShipping",
+    "status": "NOT_RUN_ON_TARGET_MACHINE"
+  },
+  {
+    "id": "TC17",
+    "level": "UI",
+    "description": "Hủy overview giữ hàng trong giỏ",
+    "method": "testCancelOverview",
+    "status": "NOT_RUN_ON_TARGET_MACHINE"
+  },
+  {
+    "id": "TC18",
+    "level": "UI",
+    "description": "Sắp xếp giá tăng dần",
+    "method": "testSortPriceAscending",
+    "status": "NOT_RUN_ON_TARGET_MACHINE"
+  },
+  {
+    "id": "TC19",
+    "level": "UI",
+    "description": "Sắp xếp tên giảm dần",
+    "method": "testSortNameDescending",
+    "status": "NOT_RUN_ON_TARGET_MACHINE"
+  },
+  {
+    "id": "TC20",
+    "level": "UI",
+    "description": "Đăng xuất",
+    "method": "testLogout",
+    "status": "NOT_RUN_ON_TARGET_MACHINE"
+  },
+  {
+    "id": "TC21",
+    "level": "UI",
+    "description": "Chi tiết sản phẩm và quay lại",
+    "method": "testProductDetails",
+    "status": "NOT_RUN_ON_TARGET_MACHINE"
+  },
+  {
+    "id": "TC22",
+    "level": "UI",
+    "description": "Sắp xếp giá giảm dần",
+    "method": "testSortPriceDescending",
+    "status": "NOT_RUN_ON_TARGET_MACHINE"
+  },
+  {
+    "id": "TC23",
+    "level": "UI",
+    "description": "Sắp xếp tên tăng dần",
+    "method": "testSortNameAscending",
+    "status": "NOT_RUN_ON_TARGET_MACHINE"
+  },
+  {
+    "id": "TC24",
+    "level": "UI",
+    "description": "Đối chiếu tổng hai sản phẩm và quay về trang chủ sau đặt hàng",
+    "method": "testTwoProductCheckout",
+    "status": "NOT_RUN_ON_TARGET_MACHINE"
+  }
+]

@@ -1,42 +1,26 @@
 package com.saucedemo.pages;
+import org.openqa.selenium.*;
+import java.math.BigDecimal;
+import java.util.List;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-
-public class CheckoutPage {
-    private WebDriver driver;
-
-    // Locators
-    private By checkoutButton = By.id("checkout");
-    private By firstNameField = By.id("first-name");
-    private By lastNameField = By.id("last-name");
-    private By postalCodeField = By.id("postal-code");
-    private By continueButton = By.id("continue");
-    private By finishButton = By.id("finish");
-    private By completeHeader = By.className("complete-header");
-
-    // Constructor
-    public CheckoutPage(WebDriver driver) {
-        this.driver = driver;
+public class CheckoutPage extends BasePage {
+    public CheckoutPage(WebDriver driver) { super(driver); }
+    public void clickCheckout() { click(By.id("checkout")); visible(By.id("first-name")); }
+    public void enterShippingInfo(String firstName, String lastName, String postalCode) {
+        fill(By.id("first-name"), firstName); fill(By.id("last-name"), lastName); fill(By.id("postal-code"), postalCode);
+        click(By.id("continue"));
     }
-
-    // Actions
-    public void clickCheckout() {
-        driver.findElement(checkoutButton).click();
+    public String getErrorMessage() { return visible(By.cssSelector("[data-test='error']")).getText(); }
+    public List<String> getItemNames() {
+        visible(By.className("summary_info"));
+        return driver.findElements(By.className("inventory_item_name")).stream().map(WebElement::getText).toList();
     }
-
-    public void enterShippingInfo(String fName, String lName, String zip) {
-        driver.findElement(firstNameField).sendKeys(fName);
-        driver.findElement(lastNameField).sendKeys(lName);
-        driver.findElement(postalCodeField).sendKeys(zip);
-        driver.findElement(continueButton).click();
-    }
-
-    public void clickFinish() {
-        driver.findElement(finishButton).click();
-    }
-
-    public String getOrderCompleteMessage() {
-        return driver.findElement(completeHeader).getText();
-    }
+    public BigDecimal getSubtotal() { return parseMoney(visible(By.className("summary_subtotal_label")).getText()); }
+    public BigDecimal getTax() { return parseMoney(visible(By.className("summary_tax_label")).getText()); }
+    public BigDecimal getTotal() { return parseMoney(visible(By.className("summary_total_label")).getText()); }
+    public void clickFinish() { click(By.id("finish")); visible(By.className("complete-header")); }
+    public String getOrderCompleteMessage() { return visible(By.className("complete-header")).getText(); }
+    public void cancelToCart() { click(By.id("cancel")); visible(By.id("checkout")); }
+    public void cancelToInventory() { click(By.id("cancel")); visible(By.className("inventory_list")); }
+    public void backHome() { click(By.id("back-to-products")); visible(By.className("inventory_list")); }
 }
