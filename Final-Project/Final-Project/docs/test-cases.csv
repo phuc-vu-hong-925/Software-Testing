@@ -35,27 +35,27 @@ UT33,UNIT,Last Name chỉ khoảng trắng,testShippingLastNameWhitespace,PASS
 UT34,UNIT,Postal Code rỗng,testShippingPostalCodeEmpty,PASS
 UT35,UNIT,Postal Code chỉ khoảng trắng,testShippingPostalCodeWhitespace,PASS
 UT36,UNIT,Dữ liệu không rỗng có khoảng trắng hai đầu,testShippingPaddedValid,PASS
-TC01,UI,Sai mật khẩu bị từ chối,testLoginFailedInvalidPassword,NOT_RUN_ON_TARGET_MACHINE
-TC02,UI,Tài khoản khóa bị từ chối,testLoginLockedOutUser,NOT_RUN_ON_TARGET_MACHINE
-TC03,UI,Đăng nhập hợp lệ,testLoginSuccess,NOT_RUN_ON_TARGET_MACHINE
-TC04,UI,"Thêm Backpack và kiểm tra đúng hàng, giá",testAddToCart,NOT_RUN_ON_TARGET_MACHINE
-TC05,UI,"E2E kiểm tra hàng, tiền và hoàn tất đơn",testEndToEndCheckout,NOT_RUN_ON_TARGET_MACHINE
-TC06,UI,Thiếu username,testLoginEmptyUsername,NOT_RUN_ON_TARGET_MACHINE
-TC07,UI,Thiếu password,testLoginEmptyPassword,NOT_RUN_ON_TARGET_MACHINE
-TC08,UI,Thêm hai sản phẩm,testAddTwoProducts,NOT_RUN_ON_TARGET_MACHINE
-TC09,UI,Xóa một trong hai sản phẩm,testRemoveOneOfTwoProducts,NOT_RUN_ON_TARGET_MACHINE
-TC10,UI,"Xóa sản phẩm cuối, giỏ rỗng",testRemoveLastProduct,NOT_RUN_ON_TARGET_MACHINE
-TC11,UI,Xóa hàng tại trang sản phẩm,testRemoveFromInventory,NOT_RUN_ON_TARGET_MACHINE
-TC12,UI,Tiếp tục mua sắm giữ nguyên giỏ,testContinueShopping,NOT_RUN_ON_TARGET_MACHINE
-TC13,UI,Checkout thiếu First Name,testCheckoutMissingFirstName,NOT_RUN_ON_TARGET_MACHINE
-TC14,UI,Checkout thiếu Last Name,testCheckoutMissingLastName,NOT_RUN_ON_TARGET_MACHINE
-TC15,UI,Checkout thiếu Postal Code,testCheckoutMissingPostalCode,NOT_RUN_ON_TARGET_MACHINE
-TC16,UI,Hủy nhập thông tin quay lại giỏ,testCancelShipping,NOT_RUN_ON_TARGET_MACHINE
-TC17,UI,Hủy overview giữ hàng trong giỏ,testCancelOverview,NOT_RUN_ON_TARGET_MACHINE
-TC18,UI,Sắp xếp giá tăng dần,testSortPriceAscending,NOT_RUN_ON_TARGET_MACHINE
-TC19,UI,Sắp xếp tên giảm dần,testSortNameDescending,NOT_RUN_ON_TARGET_MACHINE
-TC20,UI,Đăng xuất,testLogout,NOT_RUN_ON_TARGET_MACHINE
-TC21,UI,Chi tiết sản phẩm và quay lại,testProductDetails,NOT_RUN_ON_TARGET_MACHINE
-TC22,UI,Sắp xếp giá giảm dần,testSortPriceDescending,NOT_RUN_ON_TARGET_MACHINE
-TC23,UI,Sắp xếp tên tăng dần,testSortNameAscending,NOT_RUN_ON_TARGET_MACHINE
-TC24,UI,Đối chiếu tổng hai sản phẩm và quay về trang chủ sau đặt hàng,testTwoProductCheckout,NOT_RUN_ON_TARGET_MACHINE
+TC01,UI,Sai mật khẩu bị từ chối,testLoginFailedInvalidPassword,NOT_EXECUTED
+TC02,UI,Tài khoản khóa bị từ chối,testLoginLockedOutUser,NOT_EXECUTED
+TC03,UI,Đăng nhập hợp lệ,testLoginSuccess,NOT_EXECUTED
+TC04,UI,"Thêm Backpack và kiểm tra đúng hàng, giá",testAddToCart,NOT_EXECUTED
+TC05,UI,"E2E kiểm tra hàng, tiền và hoàn tất đơn",testEndToEndCheckout,NOT_EXECUTED
+TC06,UI,Thiếu username,testLoginEmptyUsername,NOT_EXECUTED
+TC07,UI,Thiếu password,testLoginEmptyPassword,NOT_EXECUTED
+TC08,UI,Thêm hai sản phẩm,testAddTwoProducts,NOT_EXECUTED
+TC09,UI,Xóa một trong hai sản phẩm,testRemoveOneOfTwoProducts,NOT_EXECUTED
+TC10,UI,"Xóa sản phẩm cuối, giỏ rỗng",testRemoveLastProduct,NOT_EXECUTED
+TC11,UI,Xóa hàng tại trang sản phẩm,testRemoveFromInventory,NOT_EXECUTED
+TC12,UI,Tiếp tục mua sắm giữ nguyên giỏ,testContinueShopping,NOT_EXECUTED
+TC13,UI,Checkout thiếu First Name,testCheckoutMissingFirstName,NOT_EXECUTED
+TC14,UI,Checkout thiếu Last Name,testCheckoutMissingLastName,NOT_EXECUTED
+TC15,UI,Checkout thiếu Postal Code,testCheckoutMissingPostalCode,NOT_EXECUTED
+TC16,UI,Hủy nhập thông tin quay lại giỏ,testCancelShipping,NOT_EXECUTED
+TC17,UI,Hủy overview giữ hàng trong giỏ,testCancelOverview,NOT_EXECUTED
+TC18,UI,Sắp xếp giá tăng dần,testSortPriceAscending,NOT_EXECUTED
+TC19,UI,Sắp xếp tên giảm dần,testSortNameDescending,NOT_EXECUTED
+TC20,UI,Đăng xuất,testLogout,NOT_EXECUTED
+TC21,UI,Chi tiết sản phẩm và quay lại,testProductDetails,NOT_EXECUTED
+TC22,UI,Sắp xếp giá giảm dần,testSortPriceDescending,NOT_EXECUTED
+TC23,UI,Sắp xếp tên tăng dần,testSortNameAscending,NOT_EXECUTED
+TC24,UI,Đối chiếu tổng hai sản phẩm và quay về trang chủ sau đặt hàng,testTwoProductCheckout,NOT_EXECUTED

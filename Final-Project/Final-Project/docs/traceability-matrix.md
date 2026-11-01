@@ -1,6 +1,6 @@
 # Ma trận truy xuất yêu cầu
 
-Liên kết dưới đây là bao phủ thiết kế; trạng thái UI chưa xác nhận thực thi.
+Liên kết dưới đây là bao phủ thiết kế; kết quả UI được theo dõi riêng trong báo cáo thực thi.
 
 | Yêu cầu | Test |
 |---|---|

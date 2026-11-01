@@ -256,167 +256,167 @@
     "level": "UI",
     "description": "Sai mật khẩu bị từ chối",
     "method": "testLoginFailedInvalidPassword",
-    "status": "NOT_RUN_ON_TARGET_MACHINE"
+    "status": "NOT_EXECUTED"
   },
   {
     "id": "TC02",
     "level": "UI",
     "description": "Tài khoản khóa bị từ chối",
     "method": "testLoginLockedOutUser",
-    "status": "NOT_RUN_ON_TARGET_MACHINE"
+    "status": "NOT_EXECUTED"
   },
   {
     "id": "TC03",
     "level": "UI",
     "description": "Đăng nhập hợp lệ",
     "method": "testLoginSuccess",
-    "status": "NOT_RUN_ON_TARGET_MACHINE"
+    "status": "NOT_EXECUTED"
   },
   {
     "id": "TC04",
     "level": "UI",
     "description": "Thêm Backpack và kiểm tra đúng hàng, giá",
     "method": "testAddToCart",
-    "status": "NOT_RUN_ON_TARGET_MACHINE"
+    "status": "NOT_EXECUTED"
   },
   {
     "id": "TC05",
     "level": "UI",
     "description": "E2E kiểm tra hàng, tiền và hoàn tất đơn",
     "method": "testEndToEndCheckout",
-    "status": "NOT_RUN_ON_TARGET_MACHINE"
+    "status": "NOT_EXECUTED"
   },
   {
     "id": "TC06",
     "level": "UI",
     "description": "Thiếu username",
     "method": "testLoginEmptyUsername",
-    "status": "NOT_RUN_ON_TARGET_MACHINE"
+    "status": "NOT_EXECUTED"
   },
   {
     "id": "TC07",
     "level": "UI",
     "description": "Thiếu password",
     "method": "testLoginEmptyPassword",
-    "status": "NOT_RUN_ON_TARGET_MACHINE"
+    "status": "NOT_EXECUTED"
   },
   {
     "id": "TC08",
     "level": "UI",
     "description": "Thêm hai sản phẩm",
     "method": "testAddTwoProducts",
-    "status": "NOT_RUN_ON_TARGET_MACHINE"
+    "status": "NOT_EXECUTED"
   },
   {
     "id": "TC09",
     "level": "UI",
     "description": "Xóa một trong hai sản phẩm",
     "method": "testRemoveOneOfTwoProducts",
-    "status": "NOT_RUN_ON_TARGET_MACHINE"
+    "status": "NOT_EXECUTED"
   },
   {
     "id": "TC10",
     "level": "UI",
     "description": "Xóa sản phẩm cuối, giỏ rỗng",
     "method": "testRemoveLastProduct",
-    "status": "NOT_RUN_ON_TARGET_MACHINE"
+    "status": "NOT_EXECUTED"
   },
   {
     "id": "TC11",
     "level": "UI",
     "description": "Xóa hàng tại trang sản phẩm",
     "method": "testRemoveFromInventory",
-    "status": "NOT_RUN_ON_TARGET_MACHINE"
+    "status": "NOT_EXECUTED"
   },
   {
     "id": "TC12",
     "level": "UI",
     "description": "Tiếp tục mua sắm giữ nguyên giỏ",
     "method": "testContinueShopping",
-    "status": "NOT_RUN_ON_TARGET_MACHINE"
+    "status": "NOT_EXECUTED"
   },
   {
     "id": "TC13",
     "level": "UI",
     "description": "Checkout thiếu First Name",
     "method": "testCheckoutMissingFirstName",
-    "status": "NOT_RUN_ON_TARGET_MACHINE"
+    "status": "NOT_EXECUTED"
   },
   {
     "id": "TC14",
     "level": "UI",
     "description": "Checkout thiếu Last Name",
     "method": "testCheckoutMissingLastName",
-    "status": "NOT_RUN_ON_TARGET_MACHINE"
+    "status": "NOT_EXECUTED"
   },
   {
     "id": "TC15",
     "level": "UI",
     "description": "Checkout thiếu Postal Code",
     "method": "testCheckoutMissingPostalCode",
-    "status": "NOT_RUN_ON_TARGET_MACHINE"
+    "status": "NOT_EXECUTED"
   },
   {
     "id": "TC16",
     "level": "UI",
     "description": "Hủy nhập thông tin quay lại giỏ",
     "method": "testCancelShipping",
-    "status": "NOT_RUN_ON_TARGET_MACHINE"
+    "status": "NOT_EXECUTED"
   },
   {
     "id": "TC17",
     "level": "UI",
     "description": "Hủy overview giữ hàng trong giỏ",
     "method": "testCancelOverview",
-    "status": "NOT_RUN_ON_TARGET_MACHINE"
+    "status": "NOT_EXECUTED"
   },
   {
     "id": "TC18",
     "level": "UI",
     "description": "Sắp xếp giá tăng dần",
     "method": "testSortPriceAscending",
-    "status": "NOT_RUN_ON_TARGET_MACHINE"
+    "status": "NOT_EXECUTED"
   },
   {
     "id": "TC19",
     "level": "UI",
     "description": "Sắp xếp tên giảm dần",
     "method": "testSortNameDescending",
-    "status": "NOT_RUN_ON_TARGET_MACHINE"
+    "status": "NOT_EXECUTED"
   },
   {
     "id": "TC20",
     "level": "UI",
     "description": "Đăng xuất",
     "method": "testLogout",
-    "status": "NOT_RUN_ON_TARGET_MACHINE"
+    "status": "NOT_EXECUTED"
   },
   {
     "id": "TC21",
     "level": "UI",
     "description": "Chi tiết sản phẩm và quay lại",
     "method": "testProductDetails",
-    "status": "NOT_RUN_ON_TARGET_MACHINE"
+    "status": "NOT_EXECUTED"
   },
   {
     "id": "TC22",
     "level": "UI",
     "description": "Sắp xếp giá giảm dần",
     "method": "testSortPriceDescending",
-    "status": "NOT_RUN_ON_TARGET_MACHINE"
+    "status": "NOT_EXECUTED"
   },
   {
     "id": "TC23",
     "level": "UI",
     "description": "Sắp xếp tên tăng dần",
     "method": "testSortNameAscending",
-    "status": "NOT_RUN_ON_TARGET_MACHINE"
+    "status": "NOT_EXECUTED"
   },
   {
     "id": "TC24",
     "level": "UI",
     "description": "Đối chiếu tổng hai sản phẩm và quay về trang chủ sau đặt hàng",
     "method": "testTwoProductCheckout",
-    "status": "NOT_RUN_ON_TARGET_MACHINE"
+    "status": "NOT_EXECUTED"
   }
 ]
